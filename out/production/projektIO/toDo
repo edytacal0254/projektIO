@@ -4,6 +4,7 @@ wyciecię zaznaczonych fragmentów i przetworznie modelem
 zbieranie inf. i tworzenie logów
 zapis zmodyfikowanego wideo
 zapis logów
+<? chyba coś pominełam  >
 
 Dostępne opcje w gui:
 wczytanie pliku wideo (button)
@@ -13,4 +14,4 @@ progress bar lub coś w tym stylu (np.przetwarzanie klatki x)
 
 Jak wszystko będzie zgrabnie działać:
 czyszczenie kodu
-komentarze
+komentarze 
