@@ -9,9 +9,9 @@ zapis logów
 Dostępne opcje w gui:
 wczytanie pliku wideo (button)
 po przetworzeniu uruchomienie zmodyfikowanego wideo (button)
-zapisz przetworzone wideo (+gdzie) (button)
+zapisz przetworzone wideo (+  gdzie) (button)
 progress bar lub coś w tym stylu (np.przetwarzanie klatki x)
 
 Jak wszystko będzie zgrabnie działać:
 czyszczenie kodu
-komentarze 
+komentarze
