@@ -2,8 +2,8 @@ Java 15
 OpenCV 4.5
 
 W programie:
-ignorowanie zaznaczeń mniejszych niż 100x50 px
-wyciecię zaznaczonych fragmentów i przetworznie modelem
+dopasowanie parametrów hog.detectMultiScale !!!
+kolor (średnia z fragmentu z zaz. człowiekiem)
 zbieranie inf. i tworzenie logów
 zapis zmodyfikowanego wideo
 zapis logów

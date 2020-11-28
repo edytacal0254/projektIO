@@ -14,41 +14,28 @@ import java.util.List;
 public class program {
     static{ System.loadLibrary(Core.NATIVE_LIBRARY_NAME); }
 
-    /*
-    //niepotrzebne
-    public static File videoFile;
-    public static void setVideo(String path){
-        File tempVideo = new File(path);
-        if(tempVideo.exists() && !tempVideo.isDirectory()) {
-            if (path.endsWith(".avi") || path.endsWith(".mp4")) {
-                videoFile = tempVideo;
-                System.out.println("Loaded video");
-            } else {
-                throw new IllegalArgumentException("Video format must be either '.avi' or '.mp4'");
-            }
-        }else{
-            throw new IllegalArgumentException("Wrong path");
-        }
-    }*/
 
-    public static void processVideo(String path) {
+    public static void processVideo(String path) throws InterruptedException {
         System.loadLibrary("opencv_videoio_ffmpeg450_64");
         BackgroundSubtractor backSub = Video.createBackgroundSubtractorKNN();
         //na podstawie przykładowego filmiku
-        //trudno stwierdzić,który lepiej sobie radzi
+        //trudno stwierdzić,który lepiej sobie radzi ten czy MOG2
+
         VideoCapture capture = new VideoCapture(path);
         if (!capture.isOpened()) {
             System.err.println("Unable to open: " + path);
+
+            //do testów
             System.exit(0);
         }
 
 
         Mat frame1 = new Mat();
         Mat frame2 = new Mat();
+        HOGDescriptor hog = new HOGDescriptor(new Size(48,96), new Size(16,16), new Size(8,8), new Size(8,8), 9);
+        hog.setSVMDetector(HOGDescriptor.getDaimlerPeopleDetector());
 
-
-            //capture.read(frame1);   //poprawić dobrze by było gdyby to było tło
-        capture.read(frame2); //poprawić dobrze by było gdyby to było tło
+        capture.read(frame2);
         while (capture.isOpened()){
             capture.read(frame2);
             if (frame2.empty()) {
@@ -83,10 +70,9 @@ public class program {
 
 
 
-            ArrayList<Mat> potentialHumans = new ArrayList<>();
 
-            Rect r;
-            ArrayList<Rect> rect_array = new ArrayList<>();
+            Rect motionRect;
+            ArrayList<Rect> motionRectArray = new ArrayList<>();
             //double maxArea = 5000; //100*50
             //int maxAreaIdx = -1;
             for (int idx = 0; idx < contours.size(); idx++) {
@@ -94,93 +80,61 @@ public class program {
                 //double contourarea = Imgproc.contourArea(contour);
                 //if (contourarea >= maxArea) {
                 //maxAreaIdx = idx;
-                r = Imgproc.boundingRect(contours.get(idx));
-                    if (r.width>=50 && r.height>=100) {
-                        rect_array.add(r);
+                motionRect = Imgproc.boundingRect(contours.get(idx));
+                    if (motionRect.width>=50 && motionRect.height>=100) {
+                        motionRectArray.add(motionRect);
                     }
                 //}
             }
-            if (rect_array.size() > 0) {
-                Iterator<Rect> it2 = rect_array.iterator();
-                while (it2.hasNext()) {
-                    Rect obj = it2.next();
-                    Imgproc.rectangle(frame2, obj.br(), obj.tl(),
-                            new Scalar(0, 255, 0), 1);
-
-                    Mat temp1 = new Mat(frame2,obj);
-
-                    potentialHumans.add(temp1.clone());
-
-                    //hog.detectMultiScale(temp,found,foundWeights);
-
-                    /*ArrayList<Rect> found_array = new ArrayList<>();
-                    found_array.addAll(Arrays.asList(found.toArray()));
-                    Iterator<Rect> it3 = found_array.iterator();
-                    while (it3.hasNext()){
-                        Rect obj3 = it3.next();
-                        Imgproc.rectangle(frame2,obj3.br(),obj3.tl(),new Scalar(255,0,0),1);
-                    }*/
 
 
-                }
-
-            }
             MatOfRect found = new MatOfRect();
             MatOfDouble foundWeights = new MatOfDouble();
 
-            //próba nr1
-            /*
-            HOGDescriptor hog = new HOGDescriptor();
-            hog.setSVMDetector(HOGDescriptor.getDefaultPeopleDetector());
-            Iterator<Mat> it3 = potentialHumans.iterator();
-            while (it3.hasNext()){
-                Mat temp = it3.next();
-                hog.detectMultiScale(temp,found,foundWeights);
-                //uszkadza  stos.....
+            if (motionRectArray.size() > 0) {
+                Iterator<Rect> it2 = motionRectArray.iterator();
+                while (it2.hasNext()) {
+                    Rect tempRect1 = it2.next();
 
-            }*/
+                    //do testów
+                    Imgproc.rectangle(frame2, tempRect1.br(), tempRect1.tl(), new Scalar(0, 255, 0), 1);
 
+                    Mat temp1 = new Mat(frame2,tempRect1);
 
-            //próba nr2 (z wątkami)
-            /*
-            for(Mat t : potentialHumans){
+                    //do testów
+                    HighGui.imshow("rero",temp1);
 
-                //HOGDescriptor hog = new HOGDescriptor();
-                //hog._winSize = Size(48, 96);
-                //HOGDescriptor hog = new HOGDescriptor(new Size(48,96),new Size(12,12),new Size(6,6),new Size(6,6),9);
-                //hog.setSVMDetector(HOGDescriptor.getDaimlerPeopleDetector());
-                // powinien być daimler ale nie da się go załadować <?>
-                HOGDescriptor hog = new HOGDescriptor();
-                hog.setSVMDetector(HOGDescriptor.getDefaultPeopleDetector());
+                    //Todo dopasować parametry
+                    hog.detectMultiScale(temp1,found,foundWeights);
+                    Rect[] humans = found.toArray();
 
-                //HighGui.imshow("framhjhhhe2",t);
-                Detection det = new Detection(t,hog,found,foundWeights);
-                Thread thread = new Thread(det);
-                //hog.detectMultiScale(t,found,foundWeights);
-                //uszkadza stos.....
-                thread.start();
+                    for (int i=0;i<humans.length;i++){
+                        Imgproc.rectangle(frame2,new Rect(tempRect1.x+humans[i].x,tempRect1.y+humans[i].y,humans[i].width,humans[i].height),new Scalar(255,0,0),1);
+                    }
+                }
+
             }
-            */
 
 
-
+            //* do testów
             HighGui.imshow("frame2",frame2);
-
             capture.read(frame1);
-            HighGui.imshow("orginal",frame1);
-
+            HighGui.imshow("original",frame1);
             HighGui.imshow("motion", diff);
 
-            // tylko do HighGui
+            ////do HighGui
             int keyboard = HighGui.waitKey(30);
             if (keyboard == 'q' || keyboard == 27) {
                 break;
             }
+            Thread.sleep(1000);
+            //*
         }
+        //do testów
         HighGui.waitKey();
         System.exit(0);
     }
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
         String input = "C:\\Users\\edyta\\IdeaProjects\\projektIO\\src\\grupaB1.mp4";
         //String input = "grupaB1.mp4";
         //processVideo("grupaB1.mp4");
