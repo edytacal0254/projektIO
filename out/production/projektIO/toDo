@@ -2,11 +2,13 @@ Java 15
 OpenCV 4.5
 
 W programie:
-dopasowanie parametrów hog.detectMultiScale !!!
-kolor (średnia z fragmentu z zaz. człowiekiem)
-zbieranie inf. i tworzenie logów
-zapis zmodyfikowanego wideo
-zapis logów
+1.dopasowanie parametrów hog.detectMultiScale !!!
+2.kolor (średnia z fragmentu z zaz. człowiekiem) (gotowe, razem z dopasowaniem
+    najbliższego koloru (obecnie 15; bez silver)) funkcja będzie działać wpełni poprawnie
+    po zrobieniu punktu 1
+3.zbieranie inf. i tworzenie logów
+4.zapis zmodyfikowanego wideo
+5.zapis logów
 <? chyba coś pominełam  >
 
 Dostępne opcje w gui:
