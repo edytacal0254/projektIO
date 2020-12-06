@@ -1,6 +1,7 @@
 Java 15
 OpenCV 4.5
 
+JEST WPROWADZONE CELOWE OPÓŹNIENIE (na końcu funkcji processVideo)
 W programie:
 1.dopasowanie parametrów hog.detectMultiScale !!!
 2.kolor (średnia z fragmentu z zaz. człowiekiem) (gotowe, razem z dopasowaniem
