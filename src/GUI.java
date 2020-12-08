@@ -11,6 +11,7 @@ public class GUI extends JFrame {
     private static final int HEIGHT = 300;
     String path;
     String savePath;
+    String videoToPlayPath;
 
     public GUI() {
         setSize(WIDTH, HEIGHT);
@@ -20,7 +21,7 @@ public class GUI extends JFrame {
         var buttonPanel = new JPanel();
 
         var label = new JLabel("Chosen file path:");
-        var pathText = new JTextField(20);
+        var pathText = new JTextField(60);
         var browse = new JButton("Browse files");
         var process = new JButton("Process file");
         browse.setAlignmentX(Component.CENTER_ALIGNMENT);
