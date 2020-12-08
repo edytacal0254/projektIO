@@ -249,7 +249,7 @@ public class program {
                     Mat frameForDetector = new Mat(frameForModifing,rectForDetecting);
 
                     //Todo dopasować parametry [przy domyślych jest nadgorliwy]
-                    hog.detectMultiScale(frameForDetector,found,foundWeights);//,0,new Size(8,8),new Size(4,4),1.05,1,true);
+                    hog.detectMultiScale(frameForDetector,found,foundWeights); //,0.1,new Size(10,10), new Size(4,4),1.2,1,false);
                     Rect[] humans = found.toArray();
 
                     //Zaznaczamy wykrytych ludzi
@@ -290,7 +290,6 @@ public class program {
 
     }
 
-    //do testów bez GUI
     public static void main(String[] args) throws InterruptedException, IOException {
 
         EventQueue.invokeLater(() ->
@@ -301,19 +300,6 @@ public class program {
            gui.setResizable(false);
            gui.setVisible(true);
         });
-
-/*
-        //ścieżka do pliku musi być absolutna
-        String input = "C:\\Users\\edyta\\IdeaProjects\\projektIO\\src\\grupaB1.mp4";
-        setColorArray();
-        setPath(input);
-        processVideo();
-        saveVideoAs("C:\\Users\\edyta\\IdeaProjects\\projektIO\\src\\testutest");
-        playVideo();
-        Thread.sleep(1000);
-        deleteTempVideo();
-        System.exit(0);
-*/
     }
 
 }
