@@ -47,6 +47,10 @@ public class program {
         return path;
     }
 
+    public static void setTempVideoPath(String path){
+        program.tempVideoPath=path;
+    }
+
     public static String getTempVideoPath() {
         return tempVideoPath;
     }
@@ -72,7 +76,7 @@ public class program {
 
             File tempVideo = new File(getTempVideoPath());
             tempVideo.renameTo(new File(path));
-
+            setTempVideoPath(path);
         }
     }
 
@@ -159,6 +163,16 @@ public class program {
         return (colorNames.get(colIdx));
     }
 
+    public static void playVideo(){
+        Runtime runtime = Runtime.getRuntime();
+        try {
+            String[] command = {"cmd.exe", "/k", "Start", getTempVideoPath()};
+            Process p =  runtime.exec(command);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 
     public static void processVideo() throws InterruptedException, IOException {
         System.loadLibrary("opencv_videoio_ffmpeg450_64");
@@ -189,6 +203,8 @@ public class program {
         }else {
             fourcc= VideoWriter.fourcc('m','p','4','v');
         }
+
+
         VideoWriter videoWriter= new VideoWriter(getTempVideoPath(),fourcc,capture.get(Videoio.CAP_PROP_FPS),getFrameSize());
 
         String colorsInFrame="";
@@ -276,6 +292,7 @@ public class program {
 
     //do testów bez GUI
     public static void main(String[] args) throws InterruptedException, IOException {
+
         EventQueue.invokeLater(() ->
         {
            var gui = new GUI();
@@ -284,14 +301,19 @@ public class program {
            gui.setResizable(false);
            gui.setVisible(true);
         });
-//        //ścieżka do pliku musi być absolutna
-//        String input = "C:\\Users\\Stasz\\IdeaProjects\\projektIO\\src\\grupaB1.avi";
-//        setColorArray();
-//        setPath(input);
-//        processVideo();
-//        saveVideoAs("C:\\Users\\Stasz\\IdeaProjects\\projektIO\\src\\testutest");
-//        deleteTempVideo();
-//        System.exit(0);
+
+/*
+        //ścieżka do pliku musi być absolutna
+        String input = "C:\\Users\\edyta\\IdeaProjects\\projektIO\\src\\grupaB1.mp4";
+        setColorArray();
+        setPath(input);
+        processVideo();
+        saveVideoAs("C:\\Users\\edyta\\IdeaProjects\\projektIO\\src\\testutest");
+        playVideo();
+        Thread.sleep(1000);
+        deleteTempVideo();
+        System.exit(0);
+*/
     }
 
 }
