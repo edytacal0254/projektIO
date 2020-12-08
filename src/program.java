@@ -1,5 +1,4 @@
 import org.opencv.core.*;
-import org.opencv.highgui.HighGui;
 import org.opencv.imgproc.Imgproc;
 import org.opencv.objdetect.HOGDescriptor;
 import org.opencv.video.BackgroundSubtractor;
@@ -8,6 +7,8 @@ import org.opencv.videoio.VideoCapture;
 import org.opencv.videoio.VideoWriter;
 import org.opencv.videoio.Videoio;
 
+import javax.swing.*;
+import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -65,7 +66,6 @@ public class program {
 
     public static void saveVideoAs(String path){
         if (!tempVideoPath.isEmpty()){
-            //nie jestem pewna czy tu musimy sprawdzać czy w gui automatycznie dorzuci format
             if (!path.endsWith(".mp4") || !path.endsWith(".avi")) {
                 path = path + getTempVideoFormat();
             }
@@ -276,14 +276,22 @@ public class program {
 
     //do testów bez GUI
     public static void main(String[] args) throws InterruptedException, IOException {
-        //ścieżka do pliku musi być absolutna
-        String input = "C:\\Users\\edyta\\IdeaProjects\\projektIO\\src\\grupaB1.avi";
-        setColorArray();
-        setPath(input);
-        processVideo();
-        saveVideoAs("C:\\Users\\edyta\\IdeaProjects\\projektIO\\src\\testutest");
-        deleteTempVideo();
-        System.exit(0);
+        EventQueue.invokeLater(() ->
+        {
+           var gui = new GUI();
+           gui.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+           gui.setTitle("Analizator monitoringu");
+           gui.setResizable(false);
+           gui.setVisible(true);
+        });
+//        //ścieżka do pliku musi być absolutna
+//        String input = "C:\\Users\\Stasz\\IdeaProjects\\projektIO\\src\\grupaB1.avi";
+//        setColorArray();
+//        setPath(input);
+//        processVideo();
+//        saveVideoAs("C:\\Users\\Stasz\\IdeaProjects\\projektIO\\src\\testutest");
+//        deleteTempVideo();
+//        System.exit(0);
     }
 
 }
