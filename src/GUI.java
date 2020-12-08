@@ -62,6 +62,7 @@ public class GUI extends JFrame {
         var browseSaveLoc = new JButton("Choose location");
         var saveButton = new JButton("Save video");
         var filenameLabel = new JLabel("Filename:");
+        var previewVidButton = new JButton("Preview video");
 
         saveButton.setEnabled(false);
 
@@ -97,9 +98,19 @@ public class GUI extends JFrame {
             pathText.setText("");
         });
 
+        previewVidButton.addActionListener(event -> {
+            program.playVideo();
+        });
+
         savePanel.setLayout(layout);
+        var filler = new JLabel("coscos");
+        var filler1 = new JLabel("coscoscos");
 
-
+        savePanel.add(filler);
+        savePanel.add(filler1);
+        filler.setVisible(false);
+        filler1.setVisible(false);
+        savePanel.add(previewVidButton);
         savePanel.add(saveLabel);
         savePanel.add(savePathText);
         savePanel.add(browseSaveLoc);
