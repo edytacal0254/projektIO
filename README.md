@@ -1,6 +1,6 @@
 # projektIO
 
-### Przygotowanie Środowiska:
+##### Przygotowanie Środowiska:
 
 
   - Pobierz i zainstaluj jdk-15.0.1_windows-x64_bin.exe z https://www.oracle.com/pl/java/technologies/javase-jdk15-downloads.html
@@ -15,4 +15,4 @@
       3. W File > Project Structure > Project Settings > Modules > Dependencies dodać __X\opencv\build\java\opencv-450.jar__ (kliknąć “+” a następnie “Add Jar/Directory”)
       4. W File > Project Structure > Project Settings > Libraries dodać __X\opencv\build\bin__  i  __X\opencv\build\java\x64__ (kliknąć “+”)
 
-### Przed uruchomieniem programu Analizatora Monitoringu przetestować działanie biblioteki OpenCV poprzez uruchomienie opencvTest)
+##### Przed uruchomieniem programu Analizatora Monitoringu przetestować działanie biblioteki OpenCV poprzez uruchomienie opencvTest)
