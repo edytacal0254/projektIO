@@ -9,7 +9,7 @@
   (dokładniej na przykładzie wersji 2020.3, na innych wersjach proces będzie zbliżony;  
   X na początku ścieżek oznacza lokalizację folderu w którym zainstalowano bibliotekę OpenCV)
       1. Ustaw wersję Javy na 15.0.1
-      2. W File > Project Structure > Project Settings > Modules > Dependencies  ORAZ File > Project Structure > Project Settings > Libraries usunąć ścieżki które zostały automatycznie dodane przy pobieraniu repozytorium (powinny być ich 3 i powinny być zaznaczone na czerwono)
+      2. W File > Project Structure > Project Settings > Modules > Dependencies  ORAZ File > Project Structure > Project Settings > Libraries usunąć ścieżki które zostały automatycznie dodane przy pobieraniu repozytorium (powinno być ich 3 i powinny być zaznaczone na czerwono)
       3. W File > Project Structure > Project Settings > Modules > Dependencies dodać __X\opencv\build\java\opencv-450.jar__ (kliknąć “+” a następnie “Add Jar/Directory”)
       4. W File > Project Structure > Project Settings > Libraries dodać __X\opencv\build\bin__  i  __X\opencv\build\java\x64__ (kliknąć “+”)
 
