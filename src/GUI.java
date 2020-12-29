@@ -16,6 +16,7 @@ public class GUI extends JFrame {
     public GUI() {
         setSize(WIDTH, HEIGHT);
 
+        //tworzę potrzebne elementy interfejsu i dodaję je do niego
         GridLayout layout = new GridLayout(0,3);
         var panel = new JPanel();
         var buttonPanel = new JPanel();
@@ -40,6 +41,7 @@ public class GUI extends JFrame {
         add(panel, BorderLayout.NORTH);
         panel.setVisible(true);
 
+        //Wybór ścieżki przetwarzanego pliku
         browse.addActionListener(event -> {
             process.setEnabled(false);
             var chooser = new JFileChooser();
@@ -50,10 +52,12 @@ public class GUI extends JFrame {
             if (result == JFileChooser.APPROVE_OPTION) {
                 path = chooser.getSelectedFile().getPath();
                 pathText.setText(path);
+                //Gdy uda się wybrać poprawną ścieżkę odblokowany zostaje przycisk analizy
                 process.setEnabled(true);
             }
         });
 
+        //Ponownie dodawanie elementów:
         var savePanel = new JPanel();
 
         var saveLabel = new JLabel("File save location:");
@@ -65,15 +69,14 @@ public class GUI extends JFrame {
         var previewVidButton = new JButton("Preview video");
 
         saveButton.setEnabled(false);
-
+        //Generujemy domyślną nazwę pliku
         LocalDateTime currentDateTime = LocalDateTime.now();
-
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("ddMMyy_HHmm");
-
         String formattedDateTime = currentDateTime.format(formatter);
         String defaultFileName = "Analysis_" + formattedDateTime;
         var filenameField = new JTextField(defaultFileName, 40);
 
+        //Wybieramy miejsce zapisu wideo
         browseSaveLoc.addActionListener(event -> {
                     var chooser = new JFileChooser();
                     chooser.setCurrentDirectory(new File("."));
@@ -87,7 +90,7 @@ public class GUI extends JFrame {
                 });
 
 
-
+        //zapisujemy wideo
         saveButton.addActionListener(event -> {
             savePath = savePathText.getText() + "\\" + filenameField.getText();
             System.out.println(savePath);
@@ -102,6 +105,8 @@ public class GUI extends JFrame {
             program.playVideo();
         });
 
+
+        //ustawianie elementów
         savePanel.setLayout(layout);
         var filler = new JLabel("coscos");
         var filler1 = new JLabel("coscoscos");
@@ -121,7 +126,7 @@ public class GUI extends JFrame {
 
         add(savePanel, BorderLayout.SOUTH);
 
-
+        //akcja przetwarzania wideo
         process.addActionListener(event -> {
             process.setText("Processing...");
             savePanel.setVisible(false);
