@@ -14,7 +14,7 @@
       4. W File > Project Structure > Project Settings > Libraries dodać __X\opencv\build\bin__  i  __X\opencv\build\java\x64__ (kliknąć “+”)
 
 #### Gotowe Środowisko:
-  - Pobierz obraz sysytemu z https://drive.google.com/file/d/19UVyvzQw3MbCRPRfhAMhD2SvSRREHbLr/view?usp=sharing
+  - Pobierz obraz sytemu z https://drive.google.com/file/d/19UVyvzQw3MbCRPRfhAMhD2SvSRREHbLr/view?usp=sharing
   - Uruchom program VirtualBox, w Plik > Importuj Urządzenie Wirtualne wybierz pobrany wcześniej obraz systemu
   ###### UWAGA: Jest to obraz gotowego środowiska w systemie Windows10 więc zajmuje prawie 10GB 
 
