@@ -16,6 +16,7 @@
 #### Gotowe Środowisko:
   - Pobierz obraz sytemu z https://drive.google.com/file/d/19UVyvzQw3MbCRPRfhAMhD2SvSRREHbLr/view?usp=sharing
   - Uruchom program VirtualBox, w Plik > Importuj Urządzenie Wirtualne wybierz pobrany wcześniej obraz systemu
+  - Hasło do obrazu systemu: haslo
   ###### UWAGA: Jest to obraz gotowego środowiska w systemie Windows10 więc zajmuje prawie 10GB 
 
 #### Przed uruchomieniem programu Analizatora Monitoringu przetestować działanie biblioteki OpenCV poprzez uruchomienie opencvTest)
