@@ -19,4 +19,4 @@
   - Hasło do obrazu systemu: haslo
   ###### UWAGA: Jest to obraz gotowego środowiska w systemie Windows10 więc zajmuje prawie 10GB 
 
-#### Przed uruchomieniem programu Analizatora Monitoringu przetestować działanie biblioteki OpenCV poprzez uruchomienie opencvTest)
+#### Przed uruchomieniem programu Analizatora Monitoringu należy przetestować działanie biblioteki OpenCV poprzez uruchomienie opencvTest
