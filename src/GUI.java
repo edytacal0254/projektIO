@@ -93,13 +93,52 @@ public class GUI extends JFrame {
         //zapisujemy wideo
         saveButton.addActionListener(event -> {
             savePath = savePathText.getText() + "\\" + filenameField.getText();
-            System.out.println(savePath);
-            program.saveVideoAs(savePath);
-            program.deleteTempVideo();
-            savePanel.setVisible(false);
-            process.setText("Process file");
-            pathText.setText("");
+            File filem = new File(savePath + ".mp4");
+            File filea = new File(savePath + ".avi");
+            if (filem.isFile() || filea.isFile()) {
+
+                int iter = 1;
+
+                filem = new File(savePath + "(" + iter + ").mp4");
+                filea = new File(savePath + "(" + iter + ").avi");
+
+                while (filem.isFile() || filea.isFile()) {
+                    iter++;
+
+                    filem = new File(savePath + "(" + iter + ").mp4");
+                    filea = new File(savePath + "(" + iter + ").avi");
+                }
+
+
+                int select = JOptionPane.showConfirmDialog(savePanel, "Plik o tej nazwie już istnieje. Czy chcesz go zapisać jako " + filenameField.getText() + "(" + iter + ")?", "Plik już istnieje", JOptionPane.OK_CANCEL_OPTION, JOptionPane.ERROR_MESSAGE);
+                if (select == JOptionPane.OK_OPTION) {
+                    savePath = savePath + "(" + iter + ")";
+                    System.out.println(savePath);
+                    program.saveVideoAs(savePath);
+                    savePanel.setVisible(false);
+                    process.setEnabled(false);
+                    process.setText("Process file");
+                    pathText.setText("");
+                    savePathText.setText("");
+                    filenameField.setText("");
+                }
+                if (select == JOptionPane.CANCEL_OPTION) {
+                    filenameField.setText("");
+                }
+
+            }
+            else {
+                System.out.println(savePath);
+                program.saveVideoAs(savePath);
+                savePanel.setVisible(false);
+                process.setEnabled(false);
+                process.setText("Process file");
+                pathText.setText("");
+                savePathText.setText("");
+                filenameField.setText("");
+            }
         });
+
 
         previewVidButton.addActionListener(event -> {
             program.playVideo();
@@ -144,7 +183,7 @@ public class GUI extends JFrame {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            process.setText("Processed!");
+            process.setText("Process again");
             savePanel.setVisible(true);
         });
 

@@ -249,7 +249,7 @@ public class program {
                     Mat frameForDetector = new Mat(frameForModifing,rectForDetecting);
 
                     //Todo dopasować parametry [przy domyślych jest nadgorliwy]
-                    hog.detectMultiScale(frameForDetector,found,foundWeights); //,0.1,new Size(10,10), new Size(4,4),1.2,1,false);
+                    hog.detectMultiScale(frameForDetector,found,foundWeights, 0, new Size(8,8), new Size(8,8), 1.15, 1, false); //,0.1,new Size(10,10), new Size(4,4),1.2,1,false);
                     Rect[] humans = found.toArray();
 
                     //Zaznaczamy wykrytych ludzi
